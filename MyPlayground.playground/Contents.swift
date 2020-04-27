@@ -31,8 +31,21 @@ extension Array where Element: Numeric {
 
 //TODO: Fazer um método que recebe 2 Arrays e retorna um Int referente a quantidade de elementos presentes em ambos os Arrays
 //BONUS TODO: Fazer o método acima receber N arrays
-func numberOfCommonItems(on arrays: [Array<Any>]) -> Int {
-    var count = 0
-    
-    return count
+func numberOfCommonItems<Element: Comparable>(on arrA: Array<Element>, and arrB: Array<Element>) -> Int {
+    var copyB = arrB
+    var counter = 0
+
+    for element in arrA {
+        if find(element: element, on: copyB) {
+            copyB.removeAll { $0 == element }
+            counter += 1
+        }
+    }
+
+    return counter
 }
+
+let a = [1, 2, 3, 4, 5, 5, 5, 5, 5, 6, 6, 6, 8]
+let b = [3, 5, 1, 4, 4, 4, 4, 4, 7, 10, 11, 22]
+
+numberOfCommonItems(on: a, and: b)
